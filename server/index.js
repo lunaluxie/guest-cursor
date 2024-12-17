@@ -48,6 +48,6 @@ wss.on('connection', (ws) => {
   });
 });
 
-ws.onerror = (error) => {
+wss.onerror = (error) => {
   console.error('Websocket error:', error);
 };
