@@ -4,6 +4,10 @@ const crypto = require('crypto');
 const wss = new WebSocket.Server({ port: 7171, path: '/cursor' });
 const clients = new Map();
 
+wss.on('headers', (headers, req) => {
+  headers.push(`Access-Control-Allow-Origin: lunalux.io`);
+});
+
 wss.on('connection', (ws) => {
   const id = crypto.randomUUID();
   const color = Math.floor(Math.random() * 360);
