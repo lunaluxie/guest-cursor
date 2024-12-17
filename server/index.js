@@ -47,3 +47,7 @@ wss.on('connection', (ws) => {
     clients.delete(ws);
   });
 });
+
+ws.onerror = (error) => {
+  console.error('Websocket error:', error);
+};
