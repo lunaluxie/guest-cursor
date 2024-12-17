@@ -9,6 +9,7 @@ wss.on('headers', (headers, req) => {
 });
 
 wss.on('connection', (ws) => {
+  console.log('WebSocket connection established', ws);
   const id = crypto.randomUUID();
   const color = Math.floor(Math.random() * 360);
   let path = "";
@@ -17,6 +18,7 @@ wss.on('connection', (ws) => {
   clients.set(ws, metadata);
 
   ws.on('message', (messageAsString) => {
+    console.log(`Received: ${message}`)
     const message = JSON.parse(messageAsString);
     const metadata = clients.get(ws);
 
