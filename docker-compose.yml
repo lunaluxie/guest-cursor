@@ -1,0 +1,6 @@
+services:
+  guest-cursor:
+    build: .
+    ports:
+      - "7171:7171"
+    restart: unless-stopped
