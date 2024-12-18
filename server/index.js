@@ -9,16 +9,15 @@ wss.on('headers', (headers, req) => {
 });
 
 wss.on('connection', (ws) => {
-  console.log('WebSocket connection established', ws);
   const id = crypto.randomUUID();
   const color = Math.floor(Math.random() * 360);
   let path = "";
   const metadata = { id, color, path};
 
   clients.set(ws, metadata);
+  console.log(`WebSocket connection established: ${clients.size} clients`);
 
   ws.on('message', (messageAsString) => {
-    console.log(`Received: ${message}`)
     const message = JSON.parse(messageAsString);
     const metadata = clients.get(ws);
 
@@ -45,6 +44,7 @@ wss.on('connection', (ws) => {
 
   ws.on('close', () => {
     clients.delete(ws);
+    console.log(`WebSocket connection closed: ${clients.size} clients`);
   });
 });
 
